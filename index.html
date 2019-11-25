@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pesen.In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
+    <script src="js/jquery-2.2.1.js" type="text/javascript"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+    <link href="css/app.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div data-role="page" id="page-login">
+        <div data-role="header" id="toolbar">
+
+            <h1>Masuk</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <h2>Masuk</h2>
+            <label for="txt-email">Email</label>
+            <input type="text" name="txt-email" id="txt-email" value="">
+            <label for="txt-password">Kata sandi</label>
+            <input type="password" name="txt-password" id="txt-password" value="">
+            <a class="ui-btn ui-corner-all" id="btn-login">Masuk</a>
+
+            <p class="txt-or">atau</p>
+
+            <a href="#page-register" class="ui-btn ui-corner-all" id="btn-goRegis">Daftar</a>
+        </div>
+    </div>
+
+    <div data-role="page" id="page-register">
+        <div data-role="header" id="toolbar">
+            <a href="#page-login" rel="external"
+                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+            <h1>Daftar</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <h2>Daftar</h2>
+            <input type="text" name="txt-namaRegis" id="txt-namaRegis" value="" placeholder="Nama">
+            <input type="text" name="txt-noTelpRegis" id="txt-noTelpRegis" value="" placeholder="No Telephone">
+            <input type="email" name="txt-emailRegis" id="txt-emailRegis" value="" placeholder="Email">
+            <input type="password" name="txt-passwordRegis" id="txt-passwordRegis" value="" placeholder="Kata sandi">
+            <input type="password" name="txt-rePasswordRegis" id="txt-rePasswordRegis" value=""
+                placeholder="Ulangi kata sandi">
+
+            <a class="ui-btn ui-corner-all" id="btn-regis">Daftar</a>
+
+            <!-- <p class="txt-or">atau</p>
+
+            <a href="sign-up.html" class="ui-btn ui-corner-all" id="btn-goRegis">Daftar</a> -->
+        </div>
+    </div>
+
+    <div data-role="page" id="page-home">
+        <div data-role="header">
+            <h1>Menu</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <ul id="list-makanan" data-role="listview" data-inset="true" data-filter="true">
+            </ul>
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#" data-icon="home" class="ui-btn-active" id="home">Menu</a></li>
+                        <li><a href="#page-cart" data-icon="shop" id="cart">Cart</a></li>
+                        <li><a href="#page-profile" data-icon="user" id="profile">Profile</a></li>
+                    </ul>
+
+                </div>
+                <!-- /navbar -->
+            </div>
+            <!-- /footer -->
+
+        </div>
+
+    </div>
+
+    <div data-role="page" id="page-cart">
+        <div data-role="header">
+            <h1>Cart</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <ul id="list-pesanan" data-role="listview">
+            </ul>
+            <br>
+            <p style="text-align: end;">Total</p>
+            <p style="text-align: end; font-weight: bold;">Rp 145,000,-</p>
+            <a href="#" id="btn-pesan" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Pesan Sekarang</a>
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#page-home" data-icon="home" id="home">Menu</a></li>
+                        <li><a href="#" data-icon="shop" class="ui-btn-active" id="cart">Cart</a></li>
+                        <li><a href="#page-profile" data-icon="user" id="profile">Profile</a></li>
+                    </ul>
+
+                </div>
+                <!-- /navbar -->
+            </div>
+            <!-- /footer -->
+
+        </div>
+
+    </div>
+
+    <div data-role="page" id="page-profile">
+        <div data-role="header">
+            <h1>Profile</h1>
+        </div>
+        <div role="main" class="ui-content">
+
+            <p style="font-weight: bold; font-size: 24px;" class="center" id="p-nama-user">Raditya Rinandyaswara</p>
+            <p class="center" id="p-nomor-user">081316524040</p>
+            <p class="center" id="p-email-user">radityarin@gmail.com</p><br>
+            <a href="#page-login" id="btn-logout"
+                style="display: block; margin-left: auto; margin-right: auto; width: 80%;"
+                class="ui-btn ui-btn-b ui-corner-all">Log Out</a>
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#page-home" data-icon="home" id="home">Menu</a></li>
+                        <li><a href="#page-cart" data-icon="shop" id="cart">Cart</a></li>
+                        <li><a href="#" data-icon="user" class="ui-btn-active" id="profile">Profile</a></li>
+                    </ul>
+
+                </div>
+                <!-- /navbar -->
+            </div>
+            <!-- /footer -->
+
+        </div>
+
+    </div>
+
+    <div data-role="page" id="detail-makanan">
+        <div data-role="header">
+            <a href="#page-home" rel="external"
+                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+            <h1>Detail Makanan</h1>
+        </div>
+        <div role="main" class="ui-content" id="main2">
+            <div style="width: 100%; height: 100%; position: relative; background-color: #fbfbfb;">
+                <img id="img-detailmakanan" src="album-bb.jpg" alt="image" style="width: 100%; height: 100%;">
+            </div>
+            <p style="font-weight: bold; font-size: 24px;" id="p-nama-makanan">Nasi Goreng Gila</p>
+            <p id="p-deskripsi-makanan">Makanan ini merupakan suatu makanan yang terkenal untuk dimakan bersama dengan
+                teman sanak saudara, orang tua, keluarga, keluarga orang lain</p>
+            <p>Harga</p>
+            <p id="p-harga-makanan">Rp 25,000</p>
+            <form>
+                <label for="tel-1">Masukan Jumlah :</label>
+                <input type="number" name="tel-1" id="jumlah-item" value="" placeholder="0">
+            </form>
+            <a href="#page-two" id="btn-masukkeranjang" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Masukan
+                ke keranjang</a>
+            <!-- <a href="#page-one" id="btn-masukkeranjang"
+                class="ui-btn ui-btn-a ui-corner-all mc-top-margin-1-5">Kembali</a> -->
+        </div>
+    </div>
+
+    <div data-role="page" id="page-menu-admin">
+        <div data-role="header">
+            <h1>Menu</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <ul id="list-menu-admin" data-role="listview" data-inset="true" data-filter="true">
+            </ul>
+
+            <a href="#page-tambah-menu" class="ui-btn ui-shadow">Tambah Menu</a>
+            <a href="#page-login" id="btn-logout-admin" style="display: block; margin-left: auto; margin-right: auto; "
+                class="ui-btn ui-btn-b ui-corner-all">Log Out</a>
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#" data-icon="grid" class="ui-btn-active">Menu</a></li>
+                        <li><a href="#" data-icon="star">Pembayaran</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+        </div>
+
+    </div>
+
+    <div data-role="page" id="page-tambah-menu">
+
+        <div data-role="header">
+            <a href="#page-menu-admin" rel="external"
+                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+            <h1>Tambah Item</h1>
+        </div>
+
+        <div style="padding: 32px;">
+            <div class="ui-field-contain">
+                <label for="text-14">Nama Item:</label>
+                <input type="text" data-mini="true" name="text-14" id="input-nama" value="">
+            </div>
+
+            <div class="ui-field-contain">
+                <label for="text-14">Kategori Item:</label>
+                <input type="text" data-mini="true" name="text-14" id="input-kategori" value="">
+            </div>
+
+            <div class="ui-field-contain">
+                <label for="text-14">Harga Item:</label>
+                <input type="text" data-mini="true" name="text-14" id="input-harga" value="">
+            </div>
+
+            <div class="ui-field-contain">
+                <label for="text-14">Deskripsi Item:</label>
+                <input type="text" data-mini="true" name="text-14" id="input-deskripsi" value="">
+            </div>
+
+            <div class="ui-field-contain">
+                <label for="file-1">Gambar Item:</label>
+                <input type="file" data-clear-btn="false" name="file-1" id="file-1" value="">
+            </div>
+
+            <div style="padding-top: 180px;">
+                <a class="ui-btn ui-shadow" id="btn-simpanMenu">Simpan</a>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <div data-role="page" id="detail-menu-admin">
+        <div data-role="header">
+            <a href="#page-login" rel="external"
+                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+            <h1>Detail Makanan</h1>
+        </div>
+        <div role="main" class="ui-content" id="main2">
+            <div style="width: 100%; height: 100%; position: relative; background-color: #fbfbfb;">
+                <img id="img-detailmakanan" src="album-bb.jpg" alt="image" style="width: 100%; height: 100%;">
+            </div>
+            <p style="font-weight: bold; font-size: 24px;" id="p-nama-makanan-admin"></p>
+            <p id="p-deskripsi-makanan-admin"></p>
+            <p>Harga</p>
+            <p id="p-harga-makanan-admin"></p>
+
+            <a id="btn-hapusMenu" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Hapus</a>
+        </div>
+    </div>
+
+
+    <script src="js/app.js" type="text/javascript"></script>
+    <script>Application.initApplication();</script>
+
+</body>
+
+</html>
