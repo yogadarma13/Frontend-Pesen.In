@@ -3,10 +3,11 @@ var Application = {
         $(window).load('pageinit', '#page-login', function () {
             Application.initLogin();
         }),
-            // $(window).load('pageinit', "#page-home", function(){
-            //     Application.initShowMenu();
+            // $(window).load('pageinit', "#page-promo-admin", function () {
+            //     // $('#list-promo-admin').listview('refresh');
+            //     Application.initShowPromo();
             // }),
-            $(window).load('pageinit', "#page-profile", function () {
+            $('#profile').on('click', function(){
                 Application.initShowProfile(localStorage.id);
             }),
             $('#btn-login').on('click', function () {
@@ -29,15 +30,24 @@ var Application = {
                 var id = $(this).data('idmenu');
                 Application.initShowDetailMenuAdmin(id);
             }),
+            $(document).on('click', '#detail-promo', function () {
+                var id = $(this).data('idpromo');
+                Application.initShowDetailPromo(id);
+            }),
             $('#btn-simpanMenu').on('click', function () {
                 Application.tambahMenu();
+            }),
+            $('#btn-simpanPromo').on('click', function(){
+                Application.tambahPromo();
             })
-            
 
+            $('#promo').on('click', function(){
+                Application.initShowPromo();
+            })
     },
 
     initLogin: function () {
-        console.log(localStorage.email);
+        // console.log(localStorage.email);
         if (localStorage.token != null) {
             if (localStorage.email == "admin@ub.ac.id") {
                 Application.initShowMenuAdmin();
@@ -60,18 +70,21 @@ var Application = {
             },
             beforeSend: function () {
                 $.mobile.loading('show', {
-                    text: 'Please wai...',
+                    text: 'Please wait...',
                     textVisible: true
                 });
             },
             success: function (response) {
                 // alert('Login berhasil')
-                console.log("berhasil");
+                
 
                 localStorage.id = response.id;
                 localStorage.email = response.email;
                 localStorage.token = response.token;
-                Application.initLogin();
+                console.log(localStorage.id);
+                // if(localStorage.token != null){
+                    Application.initLogin();
+                // }
 
             },
             error: function () {
@@ -128,6 +141,7 @@ var Application = {
     },
 
     initShowMenu: function () {
+        $('#list-makanan').empty();
         $.ajax({
             url: 'https://ppkpesenin.herokuapp.com/api/v1/users/menu',
             type: 'get',
@@ -140,15 +154,7 @@ var Application = {
                 });
             },
             success: function (dataObject) {
-                // console.log(dataObject.length);
-                // var test = 13;
-                // for (let index = 0; index < test; index++) {
-                //     var appendList = '<li><a href="#detail-makanan?id=1" id="detail-makanan" data-id-makanan="1"><img src="album-bb.jpg"><h2>Nasi Goreng Rawon Gule Tepung</h2><p>Rp 25,000,-</p></a></li>';
-                //     $('#list-makanan').append(appendList);
-                //     var appendList = '<li><a href="#detail-makanan?id=2" id="detail-makanan" data-id-makanan="2"><img src="album-bb.jpg"><h2>Nasi Goreng Rawon Gule Tepung</h2><p>Rp 25,000,-</p></a></li>';
-                //     $('#list-makanan').append(appendList);
-                //     $('#list-makanan').listview('refresh');
-                // }
+                
                 for (let index = 0; index < dataObject.length; index++) {
                     var appendList = '<li><a href="#detail-makanan?id=' +
                         dataObject[index].id + '" target = "_self" id="detail-makanan" data-idmakanan="' +
@@ -226,7 +232,7 @@ var Application = {
                 $('#p-harga-makanan-admin').text(dataObject.harga);
                 // }
 
-                $('#btn-hapusMenu').on('click', function(){
+                $('#btn-hapusMenu').on('click', function () {
                     // var id = $(this).data('idmenu');
                     Application.hapusMenu(id);
                 })
@@ -239,6 +245,7 @@ var Application = {
     },
 
     initShowProfile: function (id) {
+        // console.log(id)
         $.ajax({
             url: 'https://ppkpesenin.herokuapp.com/api/v1/users/user/' + id,
             type: 'get',
@@ -274,13 +281,14 @@ var Application = {
     logout: function () {
         // headers: {"Authorization": localStorage.getItem('token')}
         localStorage.clear();
-        Application.initApplication();
+        // Application.initApplication();
         window.location.href = '#page-login';
     },
 
 
     // Admin
     initShowMenuAdmin() {
+        $('#list-menu-admin').empty();
         $.ajax({
             url: 'https://ppkpesenin.herokuapp.com/api/v1/users/menu',
             type: 'get',
@@ -293,7 +301,7 @@ var Application = {
                 });
             },
             success: function (dataObject) {
-                console.log(dataObject.length);
+                // console.log(dataObject.length);
                 // var test = 13;
                 // for (let index = 0; index < test; index++) {
                 //     var appendList = '<li><a href="#detail-makanan?id=1" id="detail-makanan" data-id-makanan="1"><img src="album-bb.jpg"><h2>Nasi Goreng Rawon Gule Tepung</h2><p>Rp 25,000,-</p></a></li>';
@@ -333,7 +341,7 @@ var Application = {
             },
             beforeSend: function () {
                 $.mobile.loading('show', {
-                    text: 'Please wai...',
+                    text: 'Please wait...',
                     textVisible: true
                 });
 
@@ -342,7 +350,7 @@ var Application = {
             success: function (response) {
                 // alert('Berhasil menambahkan menu');
                 console.log("berhasil");
-                $('#list-makanan-admin').empty();
+                // $('#list-makanan-admin').empty();
                 Application.initShowMenuAdmin();
                 window.location.href = '#page-menu-admin';
             },
@@ -354,10 +362,10 @@ var Application = {
         });
     },
 
-    hapusMenu: function(id){
+    hapusMenu: function (id) {
         console.log(id)
         $.ajax({
-            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/delete/menu/'+ id,
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/delete/menu/' + id,
             type: 'delete',
             dataType: 'json',
             headers: { "Authorization": localStorage.getItem('token') },
@@ -371,6 +379,112 @@ var Application = {
                 $('#list-menu-admin').empty();
                 Application.initShowMenuAdmin();
                 window.location.href = '#page-menu-admin';
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+
+    initShowPromo: function(){
+        $('#list-promo-admin').empty();
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/promo',
+            type: 'get',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                
+                for (let index = 0; index < dataObject.length; index++) {
+                    // console.log(dataObject.length)
+                    var appendList = '<li><a href="#detail-promo?id=' +
+                        dataObject[index].id + '" target = "_self" id="detail-promo" data-idpromo="' +
+                        dataObject[index].id + '"><h2>' +
+                        dataObject[index].nama + '</h2><p>Diskon : ' +
+                        dataObject[index].potongan_harga + '</p></a></li>';
+                    $('#list-promo-admin').append(appendList);
+                    $('#list-promo-admin').listview('refresh');
+                }
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+
+    tambahPromo: function(){
+        console.log('masuk')
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/store/promo',
+            type: 'post',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            data: {
+                nama: $('#input-nama-promo').val(),
+                deskripsi: $('#input-deskripsi-promo').val(),
+                potongan_harga: $('#input-potonganharga-promo').val(),
+                jumlah_promo: $('#input-jumlah-promo').val()
+            },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait...',
+                    textVisible: true
+                });
+
+                console.log("before send");
+            },
+            success: function (response) {
+                console.log("berhasil");
+                alert(response.message);
+                $('#list-promo-admin').empty();
+                Application.initShowMenuAdmin();
+                window.location.href = '#page-menu-admin';
+            },
+            error: function (xhr, status, error) {
+                // var err = eval("(" + xhr.responseText + ")");
+                // alert("gagal");
+                console.log("gagal");
+            },
+        });
+    },
+
+    initShowDetailPromo: function(id){
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/promo/' + id,
+            type: 'get',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                // var test = 4;
+                // var dataMakanan;
+                // for (let index = 0; index < dataObject.length; index++) {
+                //     if (dataObject[index].id == id) {
+                //         dataMakanan = dataObject[index];
+                //     }
+                // }
+                // if(localStorage.token != null){
+                $('#p-nama-promo').text(dataObject.nama);
+                $('#p-deskripsi-promo').text(dataObject.deskripsi);
+                $('#p-diskon-promo').text(dataObject.potongan_harga);
+                // }
+
+                // $('#btn-hapusMenu').on('click', function () {
+                //     // var id = $(this).data('idmenu');
+                //     Application.hapusMenu(id);
+                // })
+
             },
             complete: function () {
                 $.mobile.loading('hide');
