@@ -52,9 +52,13 @@ var Application = {
             }),
             $('#btn-simpanPromo').on('click', function() {
                 Application.tambahPromo();
-            })
-
-        $('#promo').on('click', function() {
+            }),
+            $(window).load('pageinit', '#page-pesanan-sukses', function() {
+                let params = (new URL(document.location)).searchParams;
+                let nomororder = params.get("nomororder");
+                $('#p-nomor-pesanan').text(nomororder);
+            }),
+            $('#promo').on('click', function() {
                 Application.initShowPromo();
             }),
 
@@ -466,7 +470,6 @@ var Application = {
                 });
             },
             success: function(dataObject) {
-
                 for (let index = 0; index < dataObject.length; index++) {
                     // console.log(dataObject.length)
                     var appendList = '<li><a href="#detail-promo?id=' +
@@ -509,7 +512,7 @@ var Application = {
                 console.log("berhasil");
                 Application.initApplication();
                 alert(response.message);
-                window.location.href = '#page-pesanan-sukses?=' + response.nomor;
+                window.location.href = '#page-pesanan-sukses?nomororder=' + response.nomor;
             },
             error: function(xhr, status, error) {
                 alert("Pesan gagal");
