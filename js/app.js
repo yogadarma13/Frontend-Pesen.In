@@ -1,6 +1,7 @@
 var pesan = [];
 var idmakanan = 0;
 var total_harga = 0;
+var orderID;
 var Application = {
     initApplication: function() {
         $(window).load('pageinit', '#page-login', function() {
@@ -80,6 +81,19 @@ var Application = {
             }),
             $('#btn-lanjut-bayar').on('click', function() {
                 window.location.href = '#page-home';
+            }),
+            $('#nav-pembayaran').on('click', function () {
+                Application.initPesananUser();
+            }),
+            $('#nav-riwayat').on('click', function () {
+                Application.initRiwayat();
+            }),
+            $(document).on('click', '#detail-pesanan', function () {
+                orderID = $(this).data('orderid');
+                Application.initShowDetailPesanan(orderID);
+            }),
+            $(document).on('click', '#btn-konfirmasi', function () {
+                Application.initKonfirmasi(orderID);
             })
     },
 
@@ -873,6 +887,159 @@ var Application = {
 
             },
             complete: function() {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+    initPesananUser: function () {
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/pesan',
+            type: 'get',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                console.log(dataObject.length)
+                // var appendList = ''
+                for (let i = 0; i < dataObject.length; i++) {
+                    var appendList = '<li><a href="#page-konfirmasi?id=' +
+                        dataObject[i].nomor + '"target="_self" id="detail-pesanan" data-orderid="' +
+                        dataObject[i].nomor + '"><h2><b>Order ID</b></h2><p>' +
+                        dataObject[i].nomor + '</p><h2><b>Total</b></h2><p>Rp.' +
+                        dataObject[i].total_harga + '</p></a></li>';
+                    $("#list-pesananadmin").append(appendList);
+                    $("#list-pesananadmin").listview('refresh');
+                }
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+
+    initShowDetailPesanan: function (orderID) {
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/show/pesan/' + orderID,
+            type: 'get',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                var kembalian
+                $('#p-orderID').text(dataObject.nomor);
+                $('#p-total').text(dataObject.total_harga);
+
+                $('#textinput-bayar').on('input', function () {
+                    var bayar = $('#textinput-bayar').val();
+                    kembalian = bayar - dataObject.total_harga;
+                    if (kembalian < 0) {
+                        $('#p-kembalian').text(0);
+                    } else {
+                        $('#p-kembalian').text(kembalian);
+                    }
+                });
+
+                $('#btn-konfirmasi').on('click', function () {
+                    if (kembalian <= '0') {
+                        alert("Nominal Bayar anda Kurang");
+                    }
+                    else {
+                        window.location.href = "#page-paysuccess";
+                    }
+                });
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+
+    },
+
+    initKonfirmasi: function (orderID) {
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/show/pesan/' + orderID,
+            type: 'get',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                $('#p-orderIDsuccess').text(dataObject.nomor);
+                $('#p-totalbayarsuccess').text(dataObject.total_harga);
+                $('#p-bayarsuccess').text($('#textinput-bayar').val());
+                $('#p-kembaliansuccess').text($('#p-kembalian').text());
+                Application.initSudahBayar(orderID);
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+
+    initSudahBayar: function (orderID) {
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/store/pembayaran',
+            type: 'post',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            data: {
+                id: orderID
+            },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                alert(dataObject.message_success)
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+
+    initRiwayat: function () {
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/pembayaran',
+            type: 'get',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                console.log(dataObject.length)
+                // var appendList = ''
+                for (let i = 0; i < dataObject.length; i++) {
+                    var appendList = '<li><a href="#?id=' +
+                        dataObject[i].nomor_order + '"target="_self" id="detail-pesanan" data-orderid="' +
+                        dataObject[i].nomor_order + '"><h2><b>Order ID</b></h2><p>' +
+                        dataObject[i].nomor_order + '</p><h2><b>Total</b></h2><p>Rp.' +
+                        dataObject[i].total + '</p></a></li>';
+                    $("#list-pembayaran").append(appendList);
+                    $("#list-pembayaran").listview('refresh');
+                }
+            },
+            complete: function () {
                 $.mobile.loading('hide');
             }
         });
