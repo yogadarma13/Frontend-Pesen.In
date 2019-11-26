@@ -56,6 +56,7 @@ var Application = {
             $(window).load('pageinit', '#page-pesanan-sukses', function() {
                 let params = (new URL(document.location)).searchParams;
                 let nomororder = params.get("nomororder");
+                console.log('load' + nomororder);
                 $('#p-nomor-pesanan').text(nomororder);
             }),
             $('#promo').on('click', function() {
@@ -76,6 +77,9 @@ var Application = {
             $(document).on('click', '#detail-promo-user', function() {
                 var id = $(this).data('idpromouser');
                 Application.initShowDetailPromoUser(id);
+            }),
+            $('#btn-lanjut-bayar').on('click', function() {
+                window.location.href = '#page-home';
             })
     },
 
@@ -511,8 +515,12 @@ var Application = {
                 alert('Berhasil membuat pesanan');
                 console.log("berhasil");
                 Application.initApplication();
-                alert(response.message);
+                // alert(response.message);
+                console.log('di pesan() : ' + response.nomor);
                 window.location.href = '#page-pesanan-sukses?nomororder=' + response.nomor;
+                let params = (new URL(document.location)).searchParams;
+                let nomororder = params.get("nomororder");
+                $('#p-nomor-pesanan').text(nomororder);
             },
             error: function(xhr, status, error) {
                 alert("Pesan gagal");
