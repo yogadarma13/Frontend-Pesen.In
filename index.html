@@ -68,6 +68,7 @@
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#" data-icon="home" class="ui-btn-active" id="home">Menu</a></li>
+                        <li><a href="#page-promo" data-icon="tag" id="promo-user">Promo</a></li>
                         <li><a href="#page-cart" data-icon="shop" id="cart">Cart</a></li>
                         <li><a href="#page-profile" data-icon="user" id="profile">Profile</a></li>
                     </ul>
@@ -80,6 +81,34 @@
         </div>
 
     </div>
+
+    <div data-role="page" id="page-promo">
+        <div data-role="header">
+            <h1>Promo</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <ul id="list-promo" data-role="listview" data-inset="true" data-filter="true">
+            </ul>
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#" data-icon="home" id="home">Menu</a></li>
+                        <li><a href="#page-promo" data-icon="tag" id="promo-user" class="ui-btn-active">Promo</a></li>
+                        <li><a href="#page-cart" data-icon="shop" id="cart">Cart</a></li>
+                        <li><a href="#page-profile" data-icon="user" id="profile">Profile</a></li>
+                    </ul>
+
+                </div>
+                <!-- /navbar -->
+            </div>
+            <!-- /footer -->
+
+        </div>
+
+    </div>
+
 
     <div data-role="page" id="page-cart">
         <div data-role="header">
@@ -98,6 +127,7 @@
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#page-home" data-icon="home" id="home">Menu</a></li>
+                        <li><a href="#page-promo" data-icon="tag" id="promo-user">Promo</a></li>
                         <li><a href="#" data-icon="shop" class="ui-btn-active" id="cart">Cart</a></li>
                         <li><a href="#page-profile" data-icon="user" id="profile">Profile</a></li>
                     </ul>
@@ -117,9 +147,9 @@
         </div>
         <div role="main" class="ui-content">
 
-            <p style="font-weight: bold; font-size: 24px;" class="center" id="p-nama-user">Raditya Rinandyaswara</p>
-            <p class="center" id="p-nomor-user">081316524040</p>
-            <p class="center" id="p-email-user">radityarin@gmail.com</p><br>
+            <p style="font-weight: bold; font-size: 24px;" class="center" id="p-nama-user">-</p>
+            <p class="center" id="p-nomor-user">-</p>
+            <p class="center" id="p-email-user">-</p><br>
             <a href="#page-login" id="btn-logout"
                 style="display: block; margin-left: auto; margin-right: auto; width: 80%;"
                 class="ui-btn ui-btn-b ui-corner-all">Log Out</a>
@@ -128,6 +158,7 @@
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#page-home" data-icon="home" id="home">Menu</a></li>
+                        <li><a href="#page-promo" data-icon="tag" id="promo-user">Promo</a></li>
                         <li><a href="#page-cart" data-icon="shop" id="cart">Cart</a></li>
                         <li><a href="#" data-icon="user" class="ui-btn-active" id="profile">Profile</a></li>
                     </ul>
@@ -181,9 +212,9 @@
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar">
                     <ul>
-                            <li><a href="#" data-icon="grid" id="menu" class="ui-btn-active">Menu</a></li>
-                            <li><a href="#page-promo-admin" data-icon="info" id="promo">Promo</a></li>
-                            <li><a href="#" data-icon="star" id="bayar">Pembayaran</a></li>
+                        <li><a href="#" data-icon="grid" id="menu" class="ui-btn-active">Menu</a></li>
+                        <li><a href="#page-promo-admin" data-icon="tag" id="promo">Promo</a></li>
+                        <li><a href="#page-info-meja" data-icon="info" id="meja">Info meja</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div><!-- /footer -->
@@ -256,20 +287,45 @@
 
     <div data-role="page" id="page-promo-admin">
         <div data-role="header">
-                <a href="#page-tambah-promo" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-plus">Tambah</a>
+            <a href="#page-tambah-promo"
+                class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-plus">Tambah</a>
             <h1>Promo</h1>
         </div>
         <div role="main" class="ui-content">
             <ul id="list-promo-admin" data-role="listview" data-inset="true" data-filter="true">
             </ul>
 
-            
+
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#page-menu-admin" data-icon="grid" id="menu">Menu</a></li>
-                        <li><a href="#" data-icon="info" id="promo" class="ui-btn-active">Promo</a></li>
-                        <li><a href="#" data-icon="star" id="bayar">Pembayaran</a></li>
+                        <li><a href="#" data-icon="tag" id="promo" class="ui-btn-active">Promo</a></li>
+                        <li><a href="#page-info-meja" data-icon="info" id="meja">Info meja</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /footer -->
+        </div>
+
+    </div>
+
+    <div data-role="page" id="page-info-meja">
+        <div data-role="header">
+            <a id="btn-tambahMeja"
+                class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-plus">Meja</a>
+            <h1>Info Meja</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <ul id="list-meja-admin" data-role="listview" data-inset="true" data-filter="true">
+            </ul>
+
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#page-menu-admin" data-icon="grid" id="menu">Menu</a></li>
+                        <li><a href="#page-promo-admin" data-icon="tag" id="promo">Promo</a></li>
+                        <li><a href="#" data-icon="info" id="meja" class="ui-btn-active">Info meja</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div><!-- /footer -->
@@ -293,7 +349,7 @@
 
             <div class="ui-field-contain">
                 <label for="textarea-1">Deskripsi promo:</label>
-                <textarea name="textarea-1" id="input-deskripsi-promo"></textarea>
+                     <textarea name="textarea-1" id="input-deskripsi-promo"></textarea>
             </div>
 
             <div class="ui-field-contain">
@@ -317,22 +373,61 @@
     </div>
 
     <div data-role="page" id="detail-promo">
-            <div data-role="header">
-                <a href="#page-promo-admin" rel="external"
-                    class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
-                <h1>Promo</h1>
-            </div>
-            <div role="main" class="ui-content" id="main2">
-                <h2>Detail Promo:</h2>
-                <h3>Nama Promo:</h3>
-                <p id="p-nama-promo">-</p>
-                <h3>Deskripsi Promo:</h3>
-                <p id="p-deskripsi-promo">-</p>
-                <h3>Diskon Promo:</h3>
-                <p id="p-diskon-promo">-</p>
-                
-            </div>
+        <div data-role="header">
+            <a href="#page-promo-admin" rel="external"
+                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+            <h1>Promo</h1>
         </div>
+        <div role="main" class="ui-content" id="main2">
+            <h2>Detail Promo:</h2>
+            <h3>Nama Promo:</h3>
+            <p id="p-nama-promo">-</p>
+            <h3>Deskripsi Promo:</h3>
+            <p id="p-deskripsi-promo">-</p>
+            <h3>Diskon Promo:</h3>
+            <p id="p-diskon-promo">-</p>
+
+            <a id="btn-hapusPromo" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Hapus</a>
+
+        </div>
+    </div>
+
+    <div data-role="page" id="detail-promo-user">
+        <div data-role="header">
+            <a href="#page-promo" rel="external"
+                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+            <h1>Promo</h1>
+        </div>
+        <div role="main" class="ui-content" id="main2">
+            <h2>Detail Promo:</h2>
+            <h3>Nama Promo:</h3>
+            <p id="p-nama-promo-user">-</p>
+            <h3>Deskripsi Promo:</h3>
+            <p id="p-deskripsi-promo-user">-</p>
+            <h3>Diskon Promo:</h3>
+            <p id="p-diskon-promo-user">-</p>
+
+            <a id="btn-hapusPromo" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Hapus</a>
+
+        </div>
+    </div>
+
+    <div data-role="page" id="detail-meja">
+        <div data-role="header">
+            <a href="#page-info-meja" rel="external"
+                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+            <h1>Info meja</h1>
+        </div>
+        <div role="main" class="ui-content" id="main2">
+            <h2>Detail Meja:</h2>
+            <h3 id="p-nama-meja"></h3>
+            <h3>Status meja:</h3>
+            <p id="p-status-meja">-</p>
+
+            <a id="btn-setMeja" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Set meja kosong</a>
+
+        </div>
+    </div>
 
 
     <script src="js/app.js" type="text/javascript"></script>

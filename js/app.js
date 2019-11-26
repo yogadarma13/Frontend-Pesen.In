@@ -34,6 +34,10 @@ var Application = {
                 var id = $(this).data('idpromo');
                 Application.initShowDetailPromo(id);
             }),
+            $(document).on('click', '#detail-meja', function () {
+                var id = $(this).data('idmeja');
+                Application.initShowDetailMeja(id);
+            }),
             $('#btn-simpanMenu').on('click', function () {
                 Application.tambahMenu();
             }),
@@ -43,6 +47,22 @@ var Application = {
 
             $('#promo').on('click', function(){
                 Application.initShowPromo();
+            }),
+
+            $('#meja').on('click', function(){
+                Application.initShowMeja();
+            }),
+
+            $('#btn-tambahMeja').on('click', function(){
+                Application.initTambahMeja();
+            }),
+
+            $('#promo-user').on('click', function(){
+                Application.initShowPromoUser();
+            }),
+            $(document).on('click', '#detail-promo-user', function () {
+                var id = $(this).data('idpromouser');
+                Application.initShowDetailPromoUser(id);
             })
     },
 
@@ -443,14 +463,17 @@ var Application = {
                 console.log("berhasil");
                 alert(response.message);
                 $('#list-promo-admin').empty();
-                Application.initShowMenuAdmin();
-                window.location.href = '#page-menu-admin';
+                Application.initShowPromo();
+                window.location.href = '#page-promo-admin';
             },
             error: function (xhr, status, error) {
                 // var err = eval("(" + xhr.responseText + ")");
                 // alert("gagal");
                 console.log("gagal");
             },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
         });
     },
 
@@ -467,28 +490,230 @@ var Application = {
                 });
             },
             success: function (dataObject) {
-                // var test = 4;
-                // var dataMakanan;
-                // for (let index = 0; index < dataObject.length; index++) {
-                //     if (dataObject[index].id == id) {
-                //         dataMakanan = dataObject[index];
-                //     }
-                // }
-                // if(localStorage.token != null){
+                
                 $('#p-nama-promo').text(dataObject.nama);
                 $('#p-deskripsi-promo').text(dataObject.deskripsi);
                 $('#p-diskon-promo').text(dataObject.potongan_harga);
                 // }
 
-                // $('#btn-hapusMenu').on('click', function () {
-                //     // var id = $(this).data('idmenu');
-                //     Application.hapusMenu(id);
-                // })
+                $('#btn-hapusPromo').on('click', function () {
+                    // var id = $(this).data('idmenu');
+                    Application.hapusPromo(id);
+                })
 
             },
             complete: function () {
                 $.mobile.loading('hide');
             }
         });
-    }
+    },
+    hapusPromo: function(id){
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/delete/promo/' + id,
+            type: 'delete',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                alert(dataObject.message);
+                Application.initShowPromo();
+                window.location.href = '#page-promo-admin';
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+
+    initShowMeja: function(){
+        $('#list-meja-admin').empty();
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/meja',
+            type: 'get',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                console.log('masuk')
+                
+                for (let index = 0; index < dataObject.length; index++) {
+                    // console.log(dataObject.length)
+                    var status = ""
+                    if(dataObject[index].status == 0){
+                        status = "Kosong"
+                    } else if(dataObject[index].status == 1){
+                        status = "Penuh"
+                    }
+
+                    var appendList = '<li><a href="#detail-meja?id=' +
+                        dataObject[index].nomor + '" target = "_self" id="detail-meja" data-idmeja="' +
+                        dataObject[index].nomor + '"><h2> Meja ' +
+                        dataObject[index].nomor + '</h2><p>Status : ' +
+                        status+ '</p></a></li>';
+                    $('#list-meja-admin').append(appendList);
+                    $('#list-meja-admin').listview('refresh');
+                }
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+
+    initShowDetailMeja: function(id){
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/show/meja/' + id,
+            type: 'get',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                
+                var status = ""
+                    if(dataObject.status == 0){
+                        status = "Kosong"
+                    } else if(dataObject.status == 1){
+                        status = "Penuh"
+                    }
+
+                $('#p-nama-meja').text("Meja " + dataObject.nomor);
+                $('#p-status-meja').text(status);
+                // }
+
+                $('#btn-setMeja').on('click', function () {
+                    // var id = $(this).data('idmenu');
+                    Application.setStatusMeja(id);
+                })
+
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+
+    setStatusMeja: function(id){
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/update/meja/' + id,
+            type: 'put',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                
+                alert(dataObject.message);
+                Application.initShowMeja();
+                window.location.href = '#page-info-meja';
+
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+
+    initTambahMeja: function(){
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/store/meja',
+            type: 'post',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                
+                alert(dataObject.message);
+                Application.initShowMeja();
+                // window.location.href = '#page-info-meja';
+
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+
+    initShowPromoUser: function(){
+        $('#list-promo').empty();
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/promo',
+            type: 'get',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                
+                for (let index = 0; index < dataObject.length; index++) {
+                    // console.log(dataObject.length)
+                    var appendList = '<li><a href="#detail-promo-user?id=' +
+                        dataObject[index].id + '" target = "_self" id="detail-promo-user" data-idpromouser="' +
+                        dataObject[index].id + '"><h2>' +
+                        dataObject[index].nama + '</h2><p>Diskon : ' +
+                        dataObject[index].potongan_harga + '</p></a></li>';
+                    $('#list-promo').append(appendList);
+                    $('#list-promo').listview('refresh');
+                }
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
+
+    initShowDetailPromoUser: function(id){
+        $.ajax({
+            url: 'https://ppkpesenin.herokuapp.com/api/v1/users/promo/' + id,
+            type: 'get',
+            dataType: 'json',
+            headers: { "Authorization": localStorage.getItem('token') },
+            beforeSend: function () {
+                $.mobile.loading('show', {
+                    text: 'Please wait while retrieving data...',
+                    textVisible: true
+                });
+            },
+            success: function (dataObject) {
+                
+                $('#p-nama-promo-user').text(dataObject.nama);
+                $('#p-deskripsi-promo-user').text(dataObject.deskripsi);
+                $('#p-diskon-promo-user').text(dataObject.potongan_harga);
+                // }
+
+                
+
+            },
+            complete: function () {
+                $.mobile.loading('hide');
+            }
+        });
+    },
 };
