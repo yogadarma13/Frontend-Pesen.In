@@ -33,8 +33,7 @@
 
     <div data-role="page" id="page-register">
         <div data-role="header" id="toolbar">
-            <a href="#page-login" rel="external"
-                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+            <a href="#page-login" rel="external" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
             <h1>Daftar</h1>
         </div>
 
@@ -44,8 +43,7 @@
             <input type="text" name="txt-noTelpRegis" id="txt-noTelpRegis" value="" placeholder="No Telephone">
             <input type="email" name="txt-emailRegis" id="txt-emailRegis" value="" placeholder="Email">
             <input type="password" name="txt-passwordRegis" id="txt-passwordRegis" value="" placeholder="Kata sandi">
-            <input type="password" name="txt-rePasswordRegis" id="txt-rePasswordRegis" value=""
-                placeholder="Ulangi kata sandi">
+            <input type="password" name="txt-rePasswordRegis" id="txt-rePasswordRegis" value="" placeholder="Ulangi kata sandi">
 
             <a class="ui-btn ui-corner-all" id="btn-regis">Daftar</a>
 
@@ -88,10 +86,12 @@
 
         <div role="main" class="ui-content">
             <ul id="list-pesanan" data-role="listview">
+
             </ul>
             <br>
+            <p style="background:gray; height: 0.5px; width: 100%;"></p>
             <p style="text-align: end;">Total</p>
-            <p style="text-align: end; font-weight: bold;">Rp 145,000,-</p>
+            <p id="p-total-harga" style="text-align: end; font-weight: bold;">0</p>
             <a href="#" id="btn-pesan" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Pesan Sekarang</a>
 
             <div data-role="footer" data-position="fixed">
@@ -117,12 +117,10 @@
         </div>
         <div role="main" class="ui-content">
 
-            <p style="font-weight: bold; font-size: 24px;" class="center" id="p-nama-user">Raditya Rinandyaswara</p>
-            <p class="center" id="p-nomor-user">081316524040</p>
-            <p class="center" id="p-email-user">radityarin@gmail.com</p><br>
-            <a href="#page-login" id="btn-logout"
-                style="display: block; margin-left: auto; margin-right: auto; width: 80%;"
-                class="ui-btn ui-btn-b ui-corner-all">Log Out</a>
+            <p style="font-weight: bold; font-size: 24px;" class="center" id="p-nama-user">Nama</p>
+            <p class="center" id="p-nomor-user">08xxxxxxxxxx</p>
+            <p class="center" id="p-email-user">email.com</p><br>
+            <a href="#page-login" id="btn-logout" style="display: block; margin-left: auto; margin-right: auto; width: 80%;" class="ui-btn ui-btn-b ui-corner-all">Log Out</a>
 
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar">
@@ -143,23 +141,20 @@
 
     <div data-role="page" id="detail-makanan">
         <div data-role="header">
-            <a href="#page-home" rel="external"
-                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+            <a href="#page-home" rel="external" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
             <h1>Detail Makanan</h1>
         </div>
         <div role="main" class="ui-content" id="main2">
             <div style="width: 100%; height: 100%; position: relative; background-color: #fbfbfb;">
                 <img id="img-detailmakanan" src="album-bb.jpg" alt="image" style="width: 100%; height: 100%;">
             </div>
-            <p style="font-weight: bold; font-size: 24px;" id="p-nama-makanan">Nasi Goreng Gila</p>
-            <p id="p-deskripsi-makanan">Makanan ini merupakan suatu makanan yang terkenal untuk dimakan bersama dengan
-                teman sanak saudara, orang tua, keluarga, keluarga orang lain</p>
+            <p style="font-weight: bold; font-size: 24px;" id="p-nama-makanan">Nama Makanan</p>
+            <p id="p-deskripsi-makanan">Deskripsi Makanan</p>
             <p>Harga</p>
-            <p id="p-harga-makanan">Rp 25,000</p>
-            <form>
-                <label for="tel-1">Masukan Jumlah :</label>
-                <input type="number" name="tel-1" id="jumlah-item" value="" placeholder="0">
-            </form>
+            <p id="p-harga-makanan">Rp 0</p>
+
+            <label for="txt-jumlah-makanan">Masukan jumlah Makanan</label>
+            <input type="number" name="txt-jumlah-makanan" id="txt-jumlah-makanan" value="">
             <a href="#page-two" id="btn-masukkeranjang" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Masukan
                 ke keranjang</a>
             <!-- <a href="#page-one" id="btn-masukkeranjang"
@@ -176,16 +171,17 @@
             </ul>
 
             <a href="#page-tambah-menu" class="ui-btn ui-shadow">Tambah Menu</a>
-            <a href="#page-login" id="btn-logout-admin" style="display: block; margin-left: auto; margin-right: auto; "
-                class="ui-btn ui-btn-b ui-corner-all">Log Out</a>
+            <a href="#page-login" id="btn-logout-admin" style="display: block; margin-left: auto; margin-right: auto; " class="ui-btn ui-btn-b ui-corner-all">Log Out</a>
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#" data-icon="grid" class="ui-btn-active">Menu</a></li>
                         <li><a href="#" data-icon="star">Pembayaran</a></li>
                     </ul>
-                </div><!-- /navbar -->
-            </div><!-- /footer -->
+                </div>
+                <!-- /navbar -->
+            </div>
+            <!-- /footer -->
         </div>
 
     </div>
@@ -193,8 +189,7 @@
     <div data-role="page" id="page-tambah-menu">
 
         <div data-role="header">
-            <a href="#page-menu-admin" rel="external"
-                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+            <a href="#page-menu-admin" rel="external" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
             <h1>Tambah Item</h1>
         </div>
 
@@ -236,8 +231,7 @@
 
     <div data-role="page" id="detail-menu-admin">
         <div data-role="header">
-            <a href="#page-login" rel="external"
-                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
+            <a href="#page-login" rel="external" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
             <h1>Detail Makanan</h1>
         </div>
         <div role="main" class="ui-content" id="main2">
@@ -253,9 +247,22 @@
         </div>
     </div>
 
+    <div data-role="page" id="page-pesanan-sukses">
+        <div data-role="header">
+            <h1>Pesanan Sukses</h1>
+        </div>
+        <div role="main" class="ui-content" id="main2">
+            <p>Pesanan anda sukses silahkan lanjuti untuk pembayaran</p>
+            <p class="center">Nomor Pesanan Anda</p>
+            <p style="font-weight: bold; font-size: 24px;" class="center" id="p-nomor-pesanan">XXXXXX</p>
+            <a id="btn-lanjut-bayar" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Bayar</a>
+        </div>
+    </div>
 
     <script src="js/app.js" type="text/javascript"></script>
-    <script>Application.initApplication();</script>
+    <script>
+        Application.initApplication();
+    </script>
 
 </body>
 
