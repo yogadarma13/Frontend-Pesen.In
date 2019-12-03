@@ -298,8 +298,8 @@
         </div>
         <div role="main" class="ui-content" id="main2">
             <p>Pesanan anda sukses silahkan lanjuti untuk pembayaran</p>
-            <p class="center">Nomor Pesanan Anda</p>
-            <p style="font-weight: bold; font-size: 24px;" class="center" id="p-nomor-pesanan">XXXXXX</p>
+            <!-- <p class="center">Nomor Pesanan Anda</p>
+            <p style="font-weight: bold; font-size: 24px;" class="center" id="p-nomor-pesanan">XXXXXX</p> -->
             <a id="btn-lanjut-bayar" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Selesai</a>
         </div>
     </div>
@@ -467,78 +467,79 @@
                     <li><a href="#page-menu-admin" data-icon="grid" id="menu4">Menu</a></li>
                     <li><a href="#page-promo-admin" data-icon="tag" id="promo4">Promo</a></li>
                     <li><a href="#page-info-meja" data-icon="info" id="meja4">Info meja</a></li>
-                    <li><a href="#" data-icon="star" id="nav-pembayaran4"
-                            class="ui-btn-active">Pembayaran</a></li>
-                    <li><a href="#page-riwayat" data-icon="clock" id="nav-riwayat">Riwayat</a></li>
+                    <li><a href="#" data-icon="star" id="nav-pembayaran4" class="ui-btn-active">Pembayaran</a></li>
+                    <li><a href="#page-riwayat" data-icon="clock" id="nav-riwayat4">Riwayat</a></li>
                 </ul>
             </div>
         </div>
+    </div>
 
-        <div data-role="page" id="page-konfirmasi">
-            <div data-role="header" data-theme="a">
-                <h1>Konfirmasi</h1>
-                <a href="#page-pembayaran" rel="external"
-                    class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
-            </div>
-    
-            <div role="main" class="ui-content">
-                <form>
-                    <h3>Order ID</h3>
-                    <p id="p-orderID"></p>
-                    <h3>Total</h3>
-                    <p id="p-total"></p>
-                    <h3>Bayar</h3>
-                    <input type="text" id="textinput-bayar" placeholder="Masukkan Nominal Bayar">
-                    <div>
-                        <h3>Kembalian</h3>
-                        <p id="p-kembalian">0</p>
-                    </div>
-                    <a class="ui-btn" id="btn-konfirmasi">Konfirmasi</a>
-                </form>
-            </div>
+    <div data-role="page" id="page-konfirmasi">
+        <div data-role="header" data-theme="a">
+            <h1>Konfirmasi</h1>
+            <a href="#page-pembayaran" rel="external"
+                class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back</a>
         </div>
 
-        <div data-role="page" id="page-paysuccess">
-            <div data-role="header" data-theme="a">
-                <h1>Invoice</h1>
-            </div>
-            <div role="main" class="ui-content">
-                <h1>Order ID</h1>
-                <p id="p-orderIDsuccess"></p>
-                <h1>Total Bayar</h1>
-                <p id="p-totalbayarsuccess"></p>
-                <h1>Bayar</h1>
-                <p id="p-bayarsuccess"></p>
-                <h1>Kembalian</h1>
-                <p id="p-kembaliansuccess"></p>
-                <h1 align="center">Sukses</h1>
-                <a href="#page-pembayaran" class="ui-btn">Kembali ke Pembayaran</a>
-                <a href="#page-riwayat" class="ui-btn">Lihat Riwayat</a>
-            </div>
-        </div>
-
-        <div data-role="page" id="page-riwayat">
-            <div data-role="header" data-theme="a">
-                <h1>Riwayat</h1>
-            </div>
-    
-            <div class="ui-content">
-                <ul id="list-pembayaran" data-role="listview" data-inset="true" data-filter="true">
-                </ul>
-            </div>
-    
-            <div data-role="footer" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#page-menu-admin" data-icon="grid" id="menu5">Menu</a></li>
-                    <li><a href="#page-promo-admin" data-icon="tag" id="promo5">Promo</a></li>
-                    <li><a href="#" data-icon="info" id="meja5">Info meja</a></li>
-                    <li><a href="#page-pembayaran" data-icon="star" id="nav-pembayaran5">Pembayaran</a></li>
-                    <li><a href="#page-riwayat" data-icon="clock" id="nav-riwayat5" class="ui-btn-active">Riwayat</a></li>
-                    </ul>
+        <div role="main" class="ui-content">
+            <form>
+                <h3>Order ID</h3>
+                <p id="p-orderID"></p>
+                <h3>Total</h3>
+                <p id="p-total"></p>
+                <h3>Bayar</h3>
+                <input type="text" id="textinput-bayar" placeholder="Masukkan Nominal Bayar">
+                <div>
+                    <h3>Kembalian</h3>
+                    <p id="p-kembalian">0</p>
                 </div>
+                <a class="ui-btn" id="btn-konfirmasi">Konfirmasi</a>
+            </form>
+        </div>
+    </div>
+
+    <div data-role="page" id="page-paysuccess">
+        <div data-role="header" data-theme="a">
+            <h1>Invoice</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <h1>Order ID</h1>
+            <p id="p-orderIDsuccess"></p>
+            <h1>Total Bayar</h1>
+            <p id="p-totalbayarsuccess"></p>
+            <h1>Bayar</h1>
+            <p id="p-bayarsuccess"></p>
+            <h1>Kembalian</h1>
+            <p id="p-kembaliansuccess"></p>
+            <h1 align="center">Sukses</h1>
+            <a href="#page-pembayaran" class="ui-btn">Kembali ke Pembayaran</a>
+            <a href="#page-riwayat" class="ui-btn">Lihat Riwayat</a>
+        </div>
+    </div>
+
+    <div data-role="page" id="page-riwayat">
+        <div data-role="header" data-theme="a">
+            <h1>Riwayat</h1>
+        </div>
+
+        <div class="ui-content">
+            <ul id="list-pembayaran" data-role="listview" data-inset="true" data-filter="true">
+            </ul>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page-menu-admin" data-icon="grid" id="menu5">Menu</a></li>
+                    <li><a href="#page-promo-admin" data-icon="tag" id="promo5">Promo</a></li>
+                    <li><a href="#page-info-meja" data-icon="info" id="meja5">Info meja</a></li>
+                    <li><a href="#page-pembayaran" data-icon="star" id="nav-pembayaran5">Pembayaran</a></li>
+                    <li><a href="#page-riwayat" data-icon="clock" id="nav-riwayat5" class="ui-btn-active">Riwayat</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </div>
 
     </div>
 

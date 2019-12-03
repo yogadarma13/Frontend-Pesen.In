@@ -101,6 +101,9 @@ var Application = {
             $('#meja4').on('click', function () {
                 Application.initShowMeja();
             }),
+            $('#meja5').on('click', function () {
+                Application.initShowMeja();
+            }),
             $('#promo').on('click', function () {
                 Application.initShowPromo();
             }),
@@ -111,6 +114,9 @@ var Application = {
                 Application.initShowPromo();
             }),
             $('#promo4').on('click', function () {
+                Application.initShowPromo();
+            }),
+            $('#promo5').on('click', function () {
                 Application.initShowPromo();
             }),
             $('#nav-pembayaran').on('click', function () {
@@ -125,6 +131,9 @@ var Application = {
             $('#nav-pembayaran4').on('click', function () {
                 Application.initPesananUser();
             }),
+            $('#nav-pembayaran5').on('click', function () {
+                Application.initPesananUser();
+            }),
             $('#nav-riwayat').on('click', function () {
                 Application.initRiwayat();
             }),
@@ -135,6 +144,9 @@ var Application = {
                 Application.initRiwayat();
             }),
             $('#nav-riwayat4').on('click', function () {
+                Application.initRiwayat();
+            }),
+            $('#nav-riwayat5').on('click', function () {
                 Application.initRiwayat();
             }),
             $('#btn-tambahMeja').on('click', function () {
@@ -1182,6 +1194,7 @@ var Application = {
         });
     },
     initShowDetailPesanan: function (orderID) {
+        console.log(orderID)
         $.ajax({
             url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/show/pesan/' + orderID,
             type: 'get',
@@ -1194,7 +1207,7 @@ var Application = {
                 });
             },
             success: function (dataObject) {
-                var kembalian
+                var kembalian;
                 $('#p-orderID').text(dataObject.nomor);
                 $('#p-total').text(dataObject.total_harga);
 
@@ -1221,6 +1234,7 @@ var Application = {
                 $.mobile.loading('hide');
             }
         });
+
     },
 
     setStatusMeja: function (id) {
@@ -1245,8 +1259,6 @@ var Application = {
             }
         });
     },
-
-
 
     initKonfirmasi: function (orderID) {
         $.ajax({
@@ -1391,7 +1403,6 @@ var Application = {
             },
             success: function (dataObject) {
                 console.log(dataObject.length)
-                // var appendList = ''
                 for (let i = 0; i < dataObject.length; i++) {
                     var appendList = '<li><a href="#?id=' +
                         dataObject[i].nomor_order + '"target="_self" id="detail-pesanan" data-orderid="' +
