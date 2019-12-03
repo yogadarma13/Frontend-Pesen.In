@@ -999,6 +999,7 @@ var Application = {
     },
 
     initPesananUser: function () {
+        $("#list-pesananadmin").empty();
         $.ajax({
             url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/pesan',
             type: 'get',
@@ -1393,6 +1394,7 @@ var Application = {
     },
 
     initRiwayat: function () {
+        $("#list-pembayaran").empty();
         $.ajax({
             url: 'https://ppkpesenin.herokuapp.com/api/v1/users/admin/pembayaran',
             type: 'get',
