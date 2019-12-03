@@ -35,6 +35,7 @@ var Application = {
             $('#btn-regis').on('click', function () {
                 Application.register();
             }),
+            // nav user
             $('#promo-user').on('click', function () {
                 Application.initShowPromoUser();
             }),
@@ -89,6 +90,8 @@ var Application = {
             $('#btn-simpanPromo').on('click', function () {
                 Application.tambahPromo();
             }),
+
+            // nav admin
             $('#meja').on('click', function () {
                 Application.initShowMeja();
             }),
